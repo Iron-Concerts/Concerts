@@ -26,17 +26,17 @@ const userSchema = new mongoose.Schema({
         required: [true, 'User needs a location']
     },
     musicStyle: {
-        type: Array,
+        type: [],
         required: [true, 'User needs a location']
     },
     imgUrl: {
         type: String,
         default: 'https://cdn3.iconfinder.com/data/icons/buildings-places/512/Concert-256.png'
     },
-    rol : {
-        tipo :  Cadena ,
-        enumeración : [ROLE_GUEST , ROLE_ADMIN],
-        predeterminado :  ROLE_GUEST
+    role: {
+        type: String,
+        enum: [ROLE_GUEST, ROLE_ADMIN],
+        default: ROLE_GUEST
     }
 }, {timestamps: true});
 
