@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const SALT_WORK_FACTOR = 10;
 
+const FIRST_ADMIN = 'admin@gmail.com';
+const ROLE_ADMIN = 'ADMIN';
+const ROLE_GUEST = 'GUEST';
+
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -27,7 +31,7 @@ const userSchema = new mongoose.Schema({
     },
     musicStyle: {
         type: [],
-        required: [true, 'User needs a location']
+        required: [true, 'User needs a music style']
     },
     imgUrl: {
         type: String,
@@ -46,6 +50,10 @@ userSchema.pre('save', function (next) {
         return next();
     }
 
+    if (user.isAdmin()) {
+        user.role = 'ADMIN';
+    }
+
     bcrypt.genSalt(SALT_WORK_FACTOR)
         .then(salt => {
             bcrypt.hash(user.password, salt)
@@ -59,6 +67,10 @@ userSchema.pre('save', function (next) {
 
 userSchema.methods.checkPassword = function (password) {
     return bcrypt.compare(password, this.password);
+};
+
+userSchema.methods.isAdmin = function() {
+    return this.username === FIRST_ADMIN || this.role === ROLE_ADMIN;
 };
 
 const User = mongoose.model('User', userSchema);
