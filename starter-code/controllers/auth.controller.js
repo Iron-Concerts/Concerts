@@ -7,12 +7,12 @@ module.exports.signup = (req, res, next) => {
 };
 
 module.exports.doSignup = (req, res, next) => {
-    User.findOne({username: req.body.username})
+    User.findOne({email: req.body.email})
         .then(user => {
             if (user != null) {
                 res.render('auth/signup', {
                     user: user,
-                    error: {username: 'Username already exists'}
+                    error: {email: 'Email already exists'}
                 });
             } else {
                 user = new User(req.body);
@@ -40,13 +40,13 @@ module.exports.login = (req, res, next) => {
 };
 
 module.exports.doLogin = (req, res, next) => {
-    const username = req.body.username;
+    const username = req.body.email;
     const password = req.body.password;
     if (!username || !password) {
         res.render('auth/login', {
-            user: {username: username},
+            user: {email: email},
             error: {
-                username: username ? '' : 'Username is required',
+                email: email ? '' : 'Email is required',
                 password: password ? '' : 'Password is required'
             }
         });
