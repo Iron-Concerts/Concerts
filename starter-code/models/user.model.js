@@ -11,7 +11,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         lowercase: true,
         required: [true, 'Email is required'],
-        match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address'],
+        match: [
+          /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+          'Please fill a valid email address'
+       ],
         unique: true
     },
     password: {
@@ -32,10 +35,10 @@ const userSchema = new mongoose.Schema({
     },
     rol : {
         tipo :  Cadena ,
-        enumeración : [ ROLE_GUEST , ROLE_ADMIN ],
+        enumeración : [ROLE_GUEST , ROLE_ADMIN],
         predeterminado :  ROLE_GUEST
     }
-}, { timestamps: true });
+}, {timestamps: true});
 
 userSchema.pre('save', function (next) {
     const user = this;
@@ -49,14 +52,14 @@ userSchema.pre('save', function (next) {
                 .then(hash => {
                     user.password = hash;
                     next();
-                })
+                });
         })
         .catch(error => next(error));
 });
 
 userSchema.methods.checkPassword = function (password) {
     return bcrypt.compare(password, this.password);
-}
+};
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;
