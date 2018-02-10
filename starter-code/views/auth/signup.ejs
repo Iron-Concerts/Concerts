@@ -13,6 +13,34 @@
         <% } %>
       </div>
 
+      <div class="form-group <%= typeof error != 'undefined' && error.location ? 'has-error' : '' %>">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="fa fa-home"></i>
+          </span>
+          <input type="text" name="location" class="form-control" placeholder="location" value="<%= typeof user != 'undefined' && user.email ? user.email : '' %>">
+        </div>
+        <% if (typeof(error) != 'undefined' && error.location) { %>
+          <label class="control-label">
+            <%= error.location %>
+          </label>
+          <% } %>
+      </div>
+
+      <div class="form-group <%= typeof error != 'undefined' && error.musicStyle ? 'has-error' : '' %>">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="fa fa-music"></i>
+          </span>
+          <input type="text" name="musicStyle" class="form-control" placeholder="musicStyle" value="<%= typeof user != 'undefined' && user.email ? user.email : '' %>">
+        </div>
+        <% if (typeof(error) != 'undefined' && error.musicStyle) { %>
+          <label class="control-label">
+            <%= error.musicStyle %>
+          </label>
+          <% } %>
+      </div>
+
       <div class="form-group <%= typeof error != 'undefined' && error.email ? 'has-error' : '' %>">
         <div class="input-group">
           <span class="input-group-addon">
