@@ -7,8 +7,8 @@ const secure = require('../configs/passport.config');
 router.get('/signup', secure.nonAuthenticated, authController.signup);
 router.post('/signup', secure.nonAuthenticated, authController.doSignup);
 
-router.get('/login', secure.nonAuthenticated, authController.login);
-router.post('/login', secure.nonAuthenticated, authController.doLogin);
+// router.get('/login', secure.nonAuthenticated, authController.login);
+// router.post('/login', secure.nonAuthenticated, authController.doLogin);
 
 
 //router.post('/auth/google', passport.authenticate('google-auth', { scope: ['openid', 'profile', 'email']}));
