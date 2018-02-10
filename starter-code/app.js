@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const favicon = require('serve-favicon');
+// const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
@@ -15,6 +15,7 @@ require('./configs/db.config');
 require('./configs/passport.config').setup(passport);
 
 const auth = require('./routes/auth.routes');
+const user = require('./routes/user.routes');
 
 var app = express();
 
@@ -54,6 +55,7 @@ app.use(function (req, res, next) {
 });
 
 app.use('/', auth);
+app.use('/', user);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

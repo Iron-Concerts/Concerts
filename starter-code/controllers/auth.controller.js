@@ -33,9 +33,9 @@ module.exports.doSignup = (req, res, next) => {
             }
         }).catch(error => next(error));
 };
-module.exports.login = (req, res, next) => {
+module.exports.login = (req, res) => {
     res.render('auth/login',{
-        flash: req.flash() 
+        flash: req.flash()
     });
 };
 
@@ -61,7 +61,7 @@ module.exports.doLogin = (req, res, next) => {
                     if (error) {
                         next(error);
                     } else {
-                        res.redirect('/profile');
+                        res.redirect(`/user/${user._id}`);
                     }
                 });
             }
@@ -86,6 +86,7 @@ module.exports.loginWithProviderCallback = (req, res, next) => {
 };
 
 module.exports.logout = (req, res, next) => {
+  // Req session may not work, delete it and let req.logout and req.redirect only
     req.session.destroy(error => {
         if (error) {
             next(error);

@@ -1,7 +1,7 @@
 const User = require('../models/user.model');
 const LocalStrategy = require('passport-local').Strategy;
 //const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-const DEFAULT_USERNAME = 'Anonymous Concerts';
+// const DEFAULT_USERNAME = 'Anonymous Concerts';
 
 
 // const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || '';
@@ -25,20 +25,20 @@ module.exports.setup = (passport) => {
     });
 
     passport.use('local-auth', new LocalStrategy({
-        usernameField: 'username',
+        usernameField: 'email',
         passwordField: 'password'
-    }, (username, password, next) => {
-        User.findOne({username: username})
+    }, (email, password, next) => {
+        User.findOne({email: email})
             .then(user => {
                 if (!user) {
-                    next(null, user, {password: 'Invalid username or password'});
+                    next(null, user, {password: 'Invalid email or password'});
                 } else {
                     user.checkPassword(password)
                         .then(match => {
                             if (match) {
                                 next(null, user);
                             } else {
-                                next(null, null, {password: 'Invalid username or password'});
+                                next(null, null, {password: 'Invalid email or password'});
                             }
                         })
                         .catch(error => next(error));

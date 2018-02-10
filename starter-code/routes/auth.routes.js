@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const authController = require('../controllers/auth.controller');
 const secure = require('../configs/passport.config');
+
 //const passport = require('passport');
 
 router.get('/signup', secure.nonAuthenticated, authController.signup);
