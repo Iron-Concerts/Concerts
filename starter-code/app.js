@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const favicon = require('serve-favicon');
+// const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
@@ -9,11 +9,13 @@ const MongoStore = require('connect-mongo')(session);
 const passport = require('passport');
 const mongoose = require('mongoose');
 const expressLayouts = require('express-ejs-layouts');
+const  flash = require('express-flash');
 
 require('./configs/db.config');
 require('./configs/passport.config').setup(passport);
 
 const auth = require('./routes/auth.routes');
+const user = require('./routes/user.routes');
 
 var app = express();
 
@@ -43,6 +45,7 @@ app.use(session({
     ttl: 24 * 60 * 60
   })
 }));
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -52,6 +55,7 @@ app.use(function (req, res, next) {
 });
 
 app.use('/', auth);
+app.use('/', user);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
