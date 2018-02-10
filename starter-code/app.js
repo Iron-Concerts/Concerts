@@ -9,6 +9,7 @@ const MongoStore = require('connect-mongo')(session);
 const passport = require('passport');
 const mongoose = require('mongoose');
 const expressLayouts = require('express-ejs-layouts');
+const  flash = require('express-flash');
 
 require('./configs/db.config');
 require('./configs/passport.config').setup(passport);
@@ -43,6 +44,7 @@ app.use(session({
     ttl: 24 * 60 * 60
   })
 }));
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
