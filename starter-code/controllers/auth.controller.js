@@ -35,7 +35,7 @@ module.exports.doSignup = (req, res, next) => {
 };
 module.exports.login = (req, res, next) => {
     res.render('auth/login',{
-        flash: req.flash()
+        //flash: req.flash() //para qué era este flash?
     });
 };
 
