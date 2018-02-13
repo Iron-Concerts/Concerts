@@ -1,0 +1,22 @@
+<div>
+  <div>
+    <a href="/event/create"> Crear Evento </a>
+    <% if (typeof(events) !== 'undefined'){ %>
+      <% events.forEach((event) =>{ %>
+        <div>
+          <div>
+            <div id="imgEvent">
+                <img src="../../public/img/<%= event.imgEvent %>"alt="eventPhoto">
+            </div>
+            <p> <%= event.nameTour %> </p>
+            <p> <%= event.artist %> </p>
+            <div>
+              <a href="/event/edit"> Editar </a>
+              <a href="/event/delete"> Eliminar </a>
+            </div>
+          </div>
+        </div>
+      <% }); %>
+    <% } %>
+  </div>
+</div>
