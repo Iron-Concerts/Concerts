@@ -16,6 +16,7 @@ require('./configs/passport.config').setup(passport);
 
 const auth = require('./routes/auth.routes');
 const user = require('./routes/user.routes');
+const events = require('./routes/event.routes');
 
 var app = express();
 
@@ -56,6 +57,7 @@ app.use(function (req, res, next) {
 
 app.use('/', auth);
 app.use('/', user);
+app.use('/', events);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
