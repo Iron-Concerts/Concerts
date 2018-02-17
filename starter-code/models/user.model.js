@@ -41,8 +41,12 @@ const userSchema = new mongoose.Schema({
         type: String,
         enum: [ROLE_GUEST, ROLE_ADMIN],
         default: ROLE_GUEST
-    },notifications: {
+    },
+    notifications: {
       type: []
+    },
+    googleID: {
+        type: String,
     }
 }, {timestamps: true});
 
