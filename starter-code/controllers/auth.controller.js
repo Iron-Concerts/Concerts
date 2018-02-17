@@ -61,7 +61,7 @@ module.exports.doLogin = (req, res, next) => {
                     if (error) {
                         next(error);
                     } else {
-                        res.redirect(`/user/${user._id}`);
+                        res.redirect(`user/${user._id}/edit`);
                     }
                 });
             }
@@ -78,7 +78,7 @@ module.exports.loginWithProviderCallback = (req, res, next) => {
                 if (error) {
                     next(error);
                 } else {
-                    res.redirect('/profile');
+                    res.redirect('/user-profile');
                 }
             });
         }
@@ -87,12 +87,6 @@ module.exports.loginWithProviderCallback = (req, res, next) => {
 
 module.exports.logout = (req, res, next) => {
   // Req session may not work, delete it and let req.logout and req.redirect only
-    req.session.destroy(error => {
-        if (error) {
-            next(error);
-        } else {
             req.logout();
             res.redirect('/login');
-        }
-    });
-};
+        };

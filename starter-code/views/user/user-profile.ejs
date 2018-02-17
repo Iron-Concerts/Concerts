@@ -1,7 +1,33 @@
-<h2> User Profile </h2>
+<h2> Usuario </h2>
 
-<h3> <%= user.name %> </h3>
+<% if (user.isNew) { %>
+  <h2>Create a new user</h2>
+<% } else { %>
+  <h2>Edit your user</h2>
+  <h3> Info actual </h3>
+  <p> <%= user.name %> </p>
+  <p> <%= user.email %> </p>
+  <p> <%= user.location %> </p>
+  <p> <%= user.musicStyle %> </p>
+<% } %>
+
+<% if (user.isNew) { %>
+  <form action="/user" method="post" class="info-form">
+<% } else { %>
+  <form action="/user/<%= user.id %>" method="post" class="info-form">
+<% } %>
+  <h3>Nueva info</h3>
+  <input type="text" name="name" placeholder="Introduce your name" value="<%= user.name %>"></br>
+  <input type="text" name="location" placeholder="Introduce your location" value="<%= user.location %>"></br>
+  <input type="text" name="email" placeholder="Introduce your email" value="<%= user.email %>">
+
+  <% if (user.isNew) { %>
+    <input type="submit" class="btn btn-green" value="Create">
+  <% } else { %>
+    <input type="submit" class="btn btn-green" value="Edit">
+  <% } %>
+</form>
 
 <a href="/">
-  Volver a inicio
+  Volver a lista de usuarios
 </a>

@@ -1,0 +1,26 @@
+<h1>List of users</h1>
+
+<div class="row">
+  <div class=" col-12">
+
+    <% users.forEach((user) => { %>
+
+    <div>
+      <h3> <%= user.name %> </h3>
+      <p>Location: <strong><%= user.location %></strong> </p>
+      <p>Email: <strong><%= user.email %></strong> </p>
+      <div class="buttons">
+        <a href="/user/<%= user._id %>/edit" class="btn btn-orange">Edit information</a>
+        <form action="/user/<%= user._id %>/delete" method="post" class="btn btn-red">
+          <input type="submit" value="Delete">
+        </form>
+      </div>
+    </div>
+
+    <% }) %>
+
+    <a href="signup" class="btn btn-green">Create a new user</a>
+
+  </div>
+
+</div>
