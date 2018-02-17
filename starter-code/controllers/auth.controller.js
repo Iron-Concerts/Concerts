@@ -61,7 +61,7 @@ module.exports.doLogin = (req, res, next) => {
                     if (error) {
                         next(error);
                     } else {
-                        res.redirect(`user/${user._id}/edit`);
+                        res.redirect('/users');
                     }
                 });
             }
@@ -78,7 +78,7 @@ module.exports.loginWithProviderCallback = (req, res, next) => {
                 if (error) {
                     next(error);
                 } else {
-                    res.redirect('/user-profile');
+                    res.redirect(`user/${user._id}/edit`);
                 }
             });
         }

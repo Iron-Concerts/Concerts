@@ -7,7 +7,7 @@ const secure = require('../configs/passport.config');
 
 //router.get('/user/:id/edit', secure.isAuthenticated, userController.edit);
 
-router.get('/', userController.index);
+router.get('/users', userController.index);
 
 router.get('/user/:id/edit', userController.edit);
 router.post('/user/:id', userController.update);

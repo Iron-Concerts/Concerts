@@ -18,8 +18,8 @@ module.exports.edit = (req, res, next) => {
 
 module.exports.update = (req, res, next) => {
   const userId = req.params.id;
-  const {name, email, location} = req.body;
-  const updates = {name, email, location};  //pendiente añadir resto de campos a actualizar
+  const {name, email, location, musicStyle, imgUrl} = req.body;
+  const updates = {name, email, location, musicStyle, imgUrl};  //pendiente añadir resto de campos a actualizar
 
   User.findByIdAndUpdate(userId, updates).then((user) => {
     res.redirect(`${user._id}/edit`);
@@ -30,6 +30,6 @@ module.exports.delete = (req, res, next) => {
   const userId = req.params.id;
 
   User.findByIdAndRemove(userId).then((user) => {
-    return res.redirect('/');
+    return res.redirect('/users');
   });
 };
