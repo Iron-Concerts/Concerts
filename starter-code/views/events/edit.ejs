@@ -1,7 +1,7 @@
 <div>
   <h2> Edit evento </h2>
   <!--<% if (typeof(session) !== 'undefined') { %> -->
-   <form action="/edit/<%= event._id %>" method="post" enctype="multipart/form-data">
+   <form action="/<%= ev._id %>/edit" method="post" enctype="multipart/form-data">
       <div class="input-group">
 
           <input type="radio" name="concierto" value="conciertos"> Concierto
@@ -13,29 +13,30 @@
         <span>
           <!--icono-->
         </span>
-        <input type="text" name="nameTour" value="<%= event.nameTour %>">
+        <input type="text" name="nameTour" value="<%= ev.nameTour %>">
       </div>
 
       <div class="input-group">
         <span>
           <!--icono-->
         </span>
-        <input type="text" name="artist" value="<%= event.artist %>">
+        <input type="text" name="artist" value="<%= ev.artist %>">
       </div>
 
       <div class="input-group">
         <span>
           <!--icono-->
         </span>
-        <textarea name="description" rows="10" cols="50"> <%= event.description %> </textarea>
+        <textarea name="description" rows="10" cols="50"> <%= ev.description %> </textarea>
       </div>
 
       <div class="input-group">
         <span>
           <!--icono-->
         </span>
+        <% console.log(ev.eventType) %>
 
-        <select class="typesStyle" name="typeStyle" multiple value="<%= event.eventsType %>">
+        <select class="typesStyle" name="typeStyle" multiple value="<%= ev.eventType %>">
           <% eventsType.forEach((type) => {%>
             <option value="<% type %>"> <%= type %>
           <% }) %>
@@ -47,28 +48,28 @@
         <span>
           <!--icono-->
         </span>
-        <input type="datetime-local" name="date" value="<%= event.eventDate %>">
+        <input type="datetime-local" name="date" value="<%= ev.eventDate %>">
       </div>
 
       <div class="input-group">
         <span>
           <!--icono-->
         </span>
-        <input type="text" name="venue" value="<%= event.venue %>">
+        <input type="text" name="venue" value="<%= ev.venue %>">
       </div>
 
       <div class="input-group">
         <span>
           <!--icono-->
         </span>
-        <input type="text" name="location" value="<%= event.location %>">
+        <input type="text" name="location" value="<%= ev.location %>">
       </div>
 
       <div class="input-group">
         <span>
           <!--icono-->
         </span>
-        <input type="number" name="price" value="<%= event.price %>" step="0.01">
+        <input type="number" name="price" value="<%= ev.price %>" step="0.01">
       </div>
 
 

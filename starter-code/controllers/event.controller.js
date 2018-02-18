@@ -54,7 +54,7 @@ module.exports.pic = (req, res) => {
   console.log(req.params.id);
   eventModel.findById(req.params.id).then((event) => {
     res.sendFile(path.join(__dirname, '../', event.file));
-  });
+  }).cath(error => next(error));
 };
 
 module.exports.showEdit = (req, res, next) => {
@@ -67,28 +67,29 @@ console.log(req.params.id);
   //  }).catch(error => next(error));
 
    eventModel.findById(req.params.id).then((ev) => {
-     res.render('events/edit', {ev});
+     res.render('events/edit', {
+       ev: ev,
+       eventsType: EVENT_TYPES
+     });
    });
 };
 
-// module.exports.update = (req, res, next) => {
-//   console.log(req.body);
-//   eventModel.findByIdAndUpdate( req.params.id,
-//         {$set: {
-//         events: req.body.events,
-//         artist: req.body.artist,
-//         description: req.body.description,
-//         eventType: req.body.eventType,
-//         eventDate: req.body.eventDate,
-//         venue: req.body.venue,
-//         location: req.body.location,
-//         price: req.body.price,
-//         imgEvent: req.body.imgEvent
-//          }}
-//      ).then((ev) => {
-//     //  console.log(user);
-//       res.render('events/index', {
-//         ev: ev
-//       });
-//     }).catch(error => next(error));
-// };
+module.exports.update = (req, res, next) => {
+  console.log(req.body);
+  eventModel.findByIdAndUpdate( req.params.id,
+        {$set: {
+        events: req.body.events,
+        artist: req.body.artist,
+        description: req.body.description,
+        eventType: req.body.eventType,
+        eventDate: req.body.eventDate,
+        venue: req.body.venue,
+        location: req.body.location,
+        price: req.body.price,
+        imgEvent: req.body.imgEvent
+         }}
+     ).then((ev) => {
+    //  console.log(user);
+      res.redirect('/events');
+    }).catch(error => next(error));
+};
