@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 require('mongoose-double')(mongoose);
+const EVENT_TYPES = require('./events-type');
 
 const schemaTypes = mongoose.Schema.Types;
 
@@ -8,7 +9,10 @@ const eventSchema = new mongoose.Schema({
   nameTour: String,
   artist: [],
   description: String,
-  eventType: String,
+  eventType: {
+    type: String,
+    enum: EVENT_TYPES
+  },
   eventDate: Date,
   venue: String,
   location: String,
