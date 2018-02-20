@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
-const eventModel = require('../models/event.model');
+const EventModel = require('../models/event.model');
 const EVENT_TYPES = require('../models/events-type');
+const UserModel = require('../models/user.model');
 
 module.exports.index = (req, res, next) => {
-  eventModel.find()
+  EventModel.find()
     .sort({createdAt: -1})
     .then((events) => {
       res.render('events/index', {
@@ -14,53 +15,65 @@ module.exports.index = (req, res, next) => {
 
 module.exports.showFormCreate = (req, res, next) => {
   res.render('events/create',{
-    eventsType: EVENT_TYPES
+    eventsType: EVENT_TYPES,
+    newEvent: new EventModel(),
   });
 };
 
-module.exports.create = (req, res, next) => {
-  const Event = new eventModel({
+module.exports.create = (req, res) => {
+  const newEvent = new EventModel({
     events: req.body.events,
     nameTour: req.body.nameTour,
     artist: req.body.artist,
     description: req.body.description,
-    eventType: req.body.typeStyle,
+    typeStyle: req.body.typeStyle,
     eventDate: req.body.date,
     venue: req.body.venue,
     location: req.body.location,
     price: req.body.price,
-    imgEvent: req.file.filename
+    imgEvent: typeof req.file !== 'undefined' ? req.file.filename : ''
   });
 
-  Event.save()
-    .then(() => {
-      res.redirect('/events');
-    })
-    .catch(error => {
+//Revisar!!!
+newEvent.save()
+.then(() => {
+  // Event.save((error,ev1) => {
+  //     UserModel.find({musicStyle:req.body.typeStyle})
+  //     .then((users) => {
+  //       users.forEach((user) => {
+  //         UserModel.findByIdAndUpdate(user._id,{
+  //           notifications: user.notifications.push(ev1.id)
+  //         });
+  //       });
+  //     });
+     res.redirect('/events');
+//REvisar!!
+    }).catch(error => {
       if (error instanceof mongoose.Error.ValidationError){
-        res.render('events/index', {
-          session: req.session.currentUser,
-          errors: error.errors
+        res.render('events/create', {
+          error: 'Error, couldn\'t save event',
+          eventsType: EVENT_TYPES,
+          newEvent,
         });
       }
     });
 };
 
 module.exports.pic = (req, res) => {
-  eventModel.findById(req.params.id).then((event) => {
+  EventModel.findById(req.params.id).then((event) => {
     res.sendFile(path.join(__dirname, '../', event.file));
   }).cath(error => next(error));
 };
 
 module.exports.showEdit = (req, res, next) => {
 console.log(req.params.id);
-  // eventModel.findById(req.params.id)
+  // EventModel.findById(req.params.id)
   //  .then(() => {
   //    res.render('events/edit');
   //    console.log('id '+req.params.id);
   //  }).catch(error => next(error));
 
-   eventModel.findById(req.params.id).then((ev) => {
+   EventModel.findById(req.params.id).then((ev) => {
      res.render('events/edit', {
        ev: ev,
        eventsType: EVENT_TYPES
@@ -69,7 +82,7 @@ console.log(req.params.id);
 };
 
 module.exports.update = (req, res, next) => {
-  eventModel.findByIdAndUpdate( req.params.id,
+  EventModel.findByIdAndUpdate( req.params.id,
         {events: req.body.events,
         artist: req.body.artist,
         description: req.body.description,
@@ -84,10 +97,10 @@ module.exports.update = (req, res, next) => {
     }).catch(error => next(error));
 };
 
-module.exports.delete = (req, res, next) => {
+module.exports.delete = (req, res) => {
   const eventId = req.params.id;
 
-   eventModel.findByIdAndRemove(eventId).then(() => {
+   EventModel.findByIdAndRemove(eventId).then(() => {
      return res.redirect('/events');
    });
 };

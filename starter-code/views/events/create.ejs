@@ -1,11 +1,14 @@
 <div>
   <h2> Crear nuevo evento </h2>
+  <% if (typeof(error) !== 'undefined') { %>
+  <h2>  <%= error %></h2>
+  <% } %>
   <!--<% if (typeof(session) !== 'undefined') { %> -->
    <form action="/event" method="post" enctype="multipart/form-data">
-      <div class="input-group">
+      <div class="input-group" required>
 
-          <input type="radio" name="concierto" value="conciertos"> Concierto
-          <input type="radio" name="festival" value="festival"> Festival
+          <input type="radio" name="events" value="concierto"> Concierto
+          <input type="radio" name="events" value="festival"> Festival
 
       </div>
 
@@ -13,9 +16,9 @@
         <span>
           <!--icono-->
         </span>
-        <input type="text" name="nameTour" placeholder="Nombre de la gira..">
+        <input type="text" name="nameTour" value="<%= newEvent.nameTour%>" placeholder="Nombre de la gira..">
       </div>
-
+<!-- añadir value newEvent.nameTour a todos los campos-->
       <div class="input-group">
         <span>
           <!--icono-->
@@ -37,7 +40,7 @@
 
         <select class="typesStyle" name="typeStyle" multiple>
           <% eventsType.forEach((type) => {%>
-            <option value="<% type %>"> <%= type %>
+            <option value="<%= type %>"> <%= type %>
           <% }) %>
         </select>
 

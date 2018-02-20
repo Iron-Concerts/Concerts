@@ -2,20 +2,22 @@ const mongoose = require('mongoose');
 const EVENT_TYPES = require('./events-type');
 
 const eventSchema = new mongoose.Schema({
-  events:[],
-  nameTour: String,
-  artist: [],
-  description: String,
-  eventType: [{
+  events: {type: String, required: true},
+  nameTour: {type: String},
+  artist: [{type: String}],
+  description: {type: String},
+  typeStyle: [{
     type: String,
     enum: EVENT_TYPES
   }],
-  eventDate: Date,
-  venue: String,
-  location: String,
-  price: Number,
-  imgEvent: String
-},{timestamps: true});
+  eventDate: {type: Date},
+  venue: {type: String},
+  location: {type: String},
+  price: {type: Number, required: true},
+  imgEvent: {type: String}
+},{
+  timestamps: true
+});
 
 const Event = mongoose.model('Event', eventSchema);
 module.exports = Event;
