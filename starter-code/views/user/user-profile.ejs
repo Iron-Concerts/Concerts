@@ -1,7 +1,37 @@
-<h2> User Profile </h2>
+<% if (user.isNew) { %>
+  <h2>Create a new user</h2>
+<% } else { %>
+  <h2>Edit your user</h2>
+<% } %>
 
-<h3> <%= user.name %> </h3>
+<% if (user.isNew) { %>
+  <form action="/signup" method="post" class="info-form">
+<% } else { %>
+  <form action="/user/<%= user.id %>" method="post" class="info-form">
+<% } %>
+  <div class="row m-t-50">
+    <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+      <div class="form-group">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <p>Name <input type="text" name="name" value="<%= user.name %>"></p></br>
+            <p>Location <input type="text" name="location" value="<%= user.location %>"></p></br>
+            <p>Email <input type="text" name="email" value="<%= user.email %>"></p></br>
+            <p>Music style <input type="text" name="musicStyle" value="<%= user.musicStyle %>"></p></br>
+            <p>Image url <input type="text" name="imgUrl" value="<%= user.imgUrl %>">  <img src="<%= user.imgUrl %>" class="img-responsive img-circle"/></p>
+          </span>
+        </div>
+      </div>
+      <% if (user.isNew) { %>
+        <input type="submit" class="btn btn-green" value="Create">
+      <% } else { %>
+        <input type="submit" class="btn btn-primary" value="Actualizar">
+      <% } %>
 
-<a href="/">
-  Volver a inicio
+    </div>
+  </div>
+</form>
+
+<a href="/users" class="btn btn-info">
+  Volver a lista de usuarios
 </a>

@@ -1,0 +1,29 @@
+<h2>List of users</h2>
+
+<div class="row">
+  <div class=" col-12">
+
+    <% users.forEach((user) => { %>
+
+    <div>
+      <h3> <%= user.name %> </h3>
+      <img src="<%= user.imgUrl %>" class="img-responsive img-circle"/>
+      <div>Location: <strong><%= user.location %></strong> </div>
+      <div>Email: <strong><%= user.email %></strong> </div>
+      <div>Estilo de música: <strong><%= user.musicStyle %></strong> </div>
+      <div>Rol: <strong><%= user.role %></strong> </div>
+      <div class="buttons">
+        <a href="/user/<%= user._id %>/edit" class="btn btn-orange">Edit information</a>
+        <form action="/user/<%= user._id %>/delete" method="post" class="btn btn-red">
+          <input type="submit" value="Delete">
+        </form>
+      </div>
+    </div>
+
+    <% }) %>
+
+    <a href="signup" class="btn btn-info">Create a new user</a>
+
+  </div>
+
+</div>

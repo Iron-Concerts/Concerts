@@ -18,7 +18,7 @@
           <span class="input-group-addon">
             <i class="fa fa-home"></i>
           </span>
-          <input type="text" name="location" class="form-control" placeholder="location" value="<%= typeof user != 'undefined' && user.email ? user.email : '' %>">
+          <input type="text" name="location" class="form-control" placeholder="location" value="<%= typeof user != 'undefined' && user.location ? user.location : '' %>">
         </div>
         <% if (typeof(error) != 'undefined' && error.location) { %>
           <label class="control-label">
@@ -32,11 +32,25 @@
           <span class="input-group-addon">
             <i class="fa fa-music"></i>
           </span>
-          <input type="text" name="musicStyle" class="form-control" placeholder="musicStyle" value="<%= typeof user != 'undefined' && user.email ? user.email : '' %>">
+          <input type="text" name="musicStyle" class="form-control" placeholder="musicStyle" value="<%= typeof user != 'undefined' && user.musicStyle ? user.musicStyle : '' %>">
         </div>
         <% if (typeof(error) != 'undefined' && error.musicStyle) { %>
           <label class="control-label">
             <%= error.musicStyle %>
+          </label>
+          <% } %>
+      </div>
+
+      <div class="form-group <%= typeof error != 'undefined' && error.imgUrl ? 'has-error' : '' %>">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="fa fa-image"></i>
+          </span>
+          <input type="text" name="imgUrl" class="form-control" placeholder="imgUrl" value="<%= typeof user != 'undefined' && user.imgUrl ? user.imgUrl : '' %>">
+        </div>
+        <% if (typeof(error) != 'undefined' && error.imgUrl) { %>
+          <label class="control-label">
+            <%= error.imgUrl %>
           </label>
           <% } %>
       </div>
@@ -70,6 +84,8 @@
       <div class="form-actions">
         <button type="submit" class="btn btn-block btn-primary">Signup</button>
       </div>
+        <a href="/auth/google">Signup with Google</a>
+
     </form>
   </div>
 </div>
