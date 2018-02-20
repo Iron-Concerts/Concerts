@@ -1,18 +1,22 @@
 <div>
   <div>
-    <a href="/event/create"> Crear Evento </a>
+    <button type="button" name="notifications">
+      <span class="glyphicon glyphicon-bell"></span>
+    <!--  <span class="badge badge-light">  countNotifications </span> -->
+    </button>
+    <a href="/event"> Crear Evento </a>
     <% if (typeof(events) !== 'undefined'){ %>
       <% events.forEach((event) =>{ %>
         <div>
           <div>
             <div id="imgEvent">
-                <img src="../../public/img/<%= event.imgEvent %>"alt="eventPhoto">
+                <img src="img/<%= event.imgEvent %>"alt="eventPhoto">
             </div>
             <p> <%= event.nameTour %> </p>
             <p> <%= event.artist %> </p>
             <div>
-              <a href="/event/edit"> Editar </a>
-              <a href="/event/delete"> Eliminar </a>
+              <a href="/<%= event._id %>/edit"> Editar </a>
+              <a href="/<%= event._id %>/delete"> Eliminar </a>
             </div>
           </div>
         </div>

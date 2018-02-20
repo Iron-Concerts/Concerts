@@ -1,0 +1,90 @@
+<div>
+  <h2> Edit evento </h2>
+  <!--<% if (typeof(session) !== 'undefined') { %> -->
+   <form action="/<%= ev._id %>/edit" method="post" enctype="multipart/form-data">
+      <div class="input-group">
+
+          <input type="radio" name="concierto" value="conciertos"> Concierto
+          <input type="radio" name="festival" value="festival"> Festival
+
+      </div>
+
+      <div class="input-group">
+        <span>
+          <!--icono-->
+        </span>
+        <input type="text" name="nameTour" value="<%= ev.nameTour %>">
+      </div>
+
+      <div class="input-group">
+        <span>
+          <!--icono-->
+        </span>
+        <input type="text" name="artist" value="<%= ev.artist %>">
+      </div>
+
+      <div class="input-group">
+        <span>
+          <!--icono-->
+        </span>
+        <textarea name="description" rows="10" cols="50"> <%= ev.description %> </textarea>
+      </div>
+
+      <div class="input-group">
+        <span>
+          <!--icono-->
+        </span>
+        <% console.log(ev.eventType) %>
+
+        <select class="typesStyle" name="typeStyle" multiple value="<%= ev.eventType %>">
+          <% eventsType.forEach((type) => {%>
+            <option value="<% type %>"> <%= type %>
+          <% }) %>
+        </select>
+
+      </div>
+
+      <div class="input-group">
+        <span>
+          <!--icono-->
+        </span>
+        <input type="datetime-local" name="date" value="<%= ev.eventDate %>">
+      </div>
+
+      <div class="input-group">
+        <span>
+          <!--icono-->
+        </span>
+        <input type="text" name="venue" value="<%= ev.venue %>">
+      </div>
+
+      <div class="input-group">
+        <span>
+          <!--icono-->
+        </span>
+        <input type="text" name="location" value="<%= ev.location %>">
+      </div>
+
+      <div class="input-group">
+        <span>
+          <!--icono-->
+        </span>
+        <input type="number" name="price" value="<%= ev.price %>" step="0.01">
+      </div>
+
+
+      <div class="input-group">
+        <span>
+          <!--icono-->
+        </span>
+        <input type="file" name="pic" class="form-control-file" id="imgEvent">
+      </div>
+
+
+
+      <div>
+        <button> Editar </button>
+      </div>
+    </form>
+    <!--<% } %> -->
+</div>

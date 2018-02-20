@@ -11,6 +11,7 @@ const mongoose = require('mongoose');
 const expressLayouts = require('express-ejs-layouts');
 const  flash = require('express-flash');
 
+
 require('./configs/db.config');
 require('./configs/passport.config').setup(passport);
 
@@ -54,6 +55,7 @@ app.use(function (req, res, next) {
   res.locals.session = req.user || {};
   next();
 });
+
 
 app.use('/', auth);
 app.use('/', user);
