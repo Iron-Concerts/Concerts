@@ -4,20 +4,27 @@ const EVENT_TYPES = require('../models/events-type');
 const UserModel = require('../models/user.model');
 
 module.exports.index = (req, res, next) => {
-  EventModel.find()
-    .sort({createdAt: -1})
-    .then((events) => {
-      res.render('events/index', {
-        events:events
-      });
-    }).catch(error => next(error));
+    EventModel.find()
+      .sort({createdAt: -1})
+      .then((events) => {
+        res.render('events/index', {
+          events:events,
+          user: req.user
+        });
+      }).catch(error => next(error));
 };
 
 module.exports.showFormCreate = (req, res, next) => {
-  res.render('events/create',{
+  res.render( 'events/create',{
     eventsType: EVENT_TYPES,
     newEvent: new EventModel(),
   });
+};
+
+module.exports.getAll = (req, res) => {
+  const user = req.user;
+  EventModel.find({})
+    .then(events => res.json({user, events}));
 };
 
 module.exports.create = (req, res) => {
