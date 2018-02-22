@@ -1,11 +1,11 @@
 const User = require('../models/user.model');
 const LocalStrategy = require('passport-local').Strategy;
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-// const DEFAULT_USERNAME = 'Anonymous Concerts';
+const DEFAULT_USERNAME = 'Anonymous Concerts';
+const DEFAULT_EMAIL = 'default@email.com';
 
-
-const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || '640003862865-l7lln791ovqpjbmj5cv9dvih66mh0oh7.apps.googleusercontent.com'; //dudas aqui
-const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET || 'pG60u5IA4n8jLZrkQxhMJZS4';
+const GOOGLE_CLIENT_ID = '640003862865-l7lln791ovqpjbmj5cv9dvih66mh0oh7.apps.googleusercontent.com'; //dudas aqui
+const GOOGLE_CLIENT_SECRET = 'pG60u5IA4n8jLZrkQxhMJZS4';
 const GOOGLE_CB_URL = '/auth/google/cb';
 
 const GOOGLE_PROVIDER = 'google';
@@ -56,22 +56,22 @@ passport.use('google-auth', new GoogleStrategy({
 function authenticateOAuthUser(accessToken, refreshToken, profile, next) {
   let provider;
   if (profile.provider === GOOGLE_PROVIDER) {
-    provider = 'googleId';
+    provider = 'googleID';
   } else {
     next();
   }
-  User.findOne({[`social.${provider}`]: profile.id})
+  User.findOne({[`${provider}`]: profile.id})
     .then(user => {
       if (user) {
         next(null, user);
       } else {
-        const email = profile.emails ? profile.emails[0].value : null;
+        const name = profile.displayName || DEFAULT_USERNAME;
+        const email = profile.emails[0].value || DEFAULT_EMAIL;
         user = new User({
-        username: email || DEFAULT_USERNAME,
-        password: Math.random().toString(36).slice(-8), // FIXME: insecure, use secure random seed
-        social: {
-          [provider]: profile.id
-        }
+          name,
+          email,
+          password: Math.random().toString(36).slice(-8), // FIXME: insecure, use secure random seed
+          googleID: profile.id
       });
   user.save()
     .then(() => {
@@ -95,7 +95,7 @@ function authenticateOAuthUser(accessToken, refreshToken, profile, next) {
 
 module.exports.nonAuthenticated = (req, res, next) => {
    if (req.isAuthenticated()) {
-     res.redirect('/');
+     res.redirect('/events');
    } else {
       next();
    }

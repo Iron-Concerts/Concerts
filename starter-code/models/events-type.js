@@ -3,7 +3,7 @@ module.exports = [
   'Heavy',
   'Electrónica',
   'Funk',
-  'Bachata',
+  'bachata',
   'Pop',
   'Reggaeton',
   'Indie'

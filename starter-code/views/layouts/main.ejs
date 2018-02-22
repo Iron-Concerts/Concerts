@@ -10,15 +10,29 @@
         crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+
+
 </head>
 
 <body>
-  <h1>Concerts</h1>
+  <nav class="navbar navbar-inverse navbar-static-top">
+    <a class="navbar-brand" href="#"> <!-- logo --> </a>
+    <a class="navbar-brand" href="/events">Home</a>
+    <% if(typeof user !== 'undefined') { %>
+      <a class="navbar-brand" href="/user/<%= user._id %>/edit">Profile</a>
+      <a class="navbar-brand" href="/logout">Logout</a>
+    <% } else { %>
+      <a class="navbar-brand" href="/login">Login</a>
+      <a class="navbar-brand" href="/signup">Signup</a>
+    <% } %>
+
+  </nav>
     <div class="main-container">
         <%- body -%>
     </div>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-        crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
 </body>

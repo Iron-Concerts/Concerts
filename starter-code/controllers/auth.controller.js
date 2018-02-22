@@ -34,9 +34,7 @@ module.exports.doSignup = (req, res, next) => {
         }).catch(error => next(error));
 };
 module.exports.login = (req, res) => {
-    res.render('auth/login',{
-        flash: req.flash()
-    });
+    res.render('auth/login');
 };
 
 module.exports.doLogin = (req, res, next) => {
@@ -61,7 +59,7 @@ module.exports.doLogin = (req, res, next) => {
                     if (error) {
                         next(error);
                     } else {
-                        res.redirect('/users');
+                        res.redirect('/events');
                     }
                 });
             }
@@ -78,14 +76,14 @@ module.exports.loginWithProviderCallback = (req, res, next) => {
                 if (error) {
                     next(error);
                 } else {
-                    res.redirect(`user/${user._id}/edit`);
+                    res.redirect('/events');
                 }
             });
         }
     })(req, res, next);
 };
 
-module.exports.logout = (req, res, next) => {
+module.exports.logout = (req, res) => {
   // Req session may not work, delete it and let req.logout and req.redirect only
             req.logout();
             res.redirect('/login');
