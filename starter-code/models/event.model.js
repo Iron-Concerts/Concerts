@@ -10,7 +10,7 @@ const eventSchema = new mongoose.Schema({
     type: String,
     enum: EVENT_TYPES
   }],
-  eventDate: {type: Date},
+  eventDate: {type: String},
   venue: {type: String},
   location: {type: String},
   price: {type: Number, required: true},

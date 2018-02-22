@@ -90,6 +90,7 @@ console.log(req.params.id);
 };
 
 module.exports.update = (req, res, next) => {
+  console.log(typeof(req.body.eventDate));
   EventModel.findByIdAndUpdate( req.params.id,
         {events: req.body.events,
         artist: req.body.artist,
