@@ -1,22 +1,32 @@
-<div>
-  <div>
-    <button type="button" name="notifications">
+<div class="row">
+  <div class="col-xs-2 col-sm-1 col-sm-offset-1">
+    <form id="custom-search-form" class="form-search form-horizontal pull-right">
+        <div class="input-append span12">
+            <input type="text" class="search-query" placeholder="Search">
+            <button type="submit" class="btn"><i class="icon-search"></i></button>
+        </div>
+    </form>
+  </div>
+  <div class="col-xs-12 col-sm-9 col-sm-offset-3">
+    <button type="button" class="btn btn-primary" name="notifications">
       <span class="glyphicon glyphicon-bell"></span>
-    <!--  <span class="badge badge-light">  countNotifications </span> -->
     </button>
     <a href="/event"> Crear Evento </a>
     <% if (typeof(events) !== 'undefined'){ %>
       <% events.forEach((event) =>{ %>
-        <div>
-          <div>
-            <div id="imgEvent">
-                <img src="img/<%= event.imgEvent %>"alt="eventPhoto">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <div class="imgEvent">
+                <img class="img-responsive img-thumbnail" src="img/<%= event.imgEvent %>">
             </div>
-            <p> <%= event.nameTour %> </p>
-            <p> <%= event.artist %> </p>
-            <div>
-              <a href="/<%= event._id %>/edit"> Editar </a>
-              <a href="/<%= event._id %>/delete"> Eliminar </a>
+            <div class="data">
+              <p> <%= event.nameTour %> </p>
+              <p> <%= event.artist %> </p>
+              <p> <%= event.description %> </p>
+            </div>
+            <div class="links">
+              <p><a href="/<%= event._id %>/edit"> Editar </a></p>
+              <p><a href="/<%= event._id %>/delete"> Eliminar </a></p>
             </div>
           </div>
         </div>
@@ -24,3 +34,29 @@
     <% } %>
   </div>
 </div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    let userEvents;
+    let fetched = false;
+    const call = function(){
+      $.ajax({
+        url:'/events/all',
+        type: 'get',
+        success: function(userAndEvents){
+          const firstMusicStyle = userAndEvents.user.musicStyle[0];
+          const eventsArray = userAndEvents.events.filter(event => {
+            return event.typeStyle.includes(firstMusicStyle);
+          })
+          if(!fetched) {
+            return [eventsArray, true];
+          }
+          console.log(eventsArray, fetched);
+        }
+      })
+    }
+    var arr = call();
+    console.log(arr)
+    setInterval(call,2000);
+  });
+  </script>

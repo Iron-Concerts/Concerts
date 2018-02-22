@@ -27,11 +27,11 @@ const userSchema = new mongoose.Schema({
     },
     location: {
         type: String,
-        required: [true, 'User needs a location']
+        //required: [true, 'User needs a location']
     },
     musicStyle: {
         type: [],
-        required: [true, 'User needs a music style']
+        //required: [true, 'User needs a music style']
     },
     imgUrl: {
         type: String,

@@ -8,7 +8,7 @@ const eventController = require('../controllers/event.controller');
 
 router.get('/events', eventController.index);
 router.get('/event', eventController.showFormCreate);
-//router.post('/event', eventController.create);
+router.get('/events/all', eventController.getAll);
 router.post('/event', upload.single('pic'), eventController.create);
 router.get('/:id/edit', eventController.showEdit);
 router.post('/:id/edit', upload.single('pic'), eventController.update);

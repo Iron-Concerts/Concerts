@@ -4,8 +4,8 @@
    <form action="/<%= ev._id %>/edit" method="post" enctype="multipart/form-data">
       <div class="input-group">
 
-          <input type="radio" name="concierto" value="conciertos"> Concierto
-          <input type="radio" name="festival" value="festival"> Festival
+          <input type="radio" name="events" value="<%= ev.events %>" <%= ev.events=='concierto' ? "checked" : ""%>> Concierto
+          <input type="radio" name="events" value="<%= ev.events %>" <%= ev.events=='festival' ? "checked" : ""%>> Festival
 
       </div>
 
@@ -36,9 +36,9 @@
         </span>
         <% console.log(ev.eventType) %>
 
-        <select class="typesStyle" name="typeStyle" multiple value="<%= ev.eventType %>">
+        <select class="typesStyle" name="typeStyle" multiple >
           <% eventsType.forEach((type) => {%>
-            <option value="<% type %>"> <%= type %>
+            <option value="<%= ev.eventType %>"> <%= type %>
           <% }) %>
         </select>
 
@@ -48,7 +48,7 @@
         <span>
           <!--icono-->
         </span>
-        <input type="datetime-local" name="date" value="<%= ev.eventDate %>">
+        <input type="datetime-local" name="eventDate" value="<%= ev.eventDate %>">
       </div>
 
       <div class="input-group">
