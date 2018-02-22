@@ -38,7 +38,7 @@
 
         <select class="typesStyle" name="typeStyle" multiple >
           <% eventsType.forEach((type) => {%>
-            <option value="<%= ev.eventType %>"> <%= type %>
+            <option value="<%= type %>" <%=ev.typeStyle.includes(type) ? "selected" : ""  %>> <%= type %>
           <% }) %>
         </select>
 
