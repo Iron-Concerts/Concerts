@@ -1,7 +1,7 @@
 <% if (user.isNew) { %>
   <h2>Create a new user</h2>
 <% } else { %>
-  <h2>Hola <%= user.name %></h2>
+  <h3>Hola <%= user.name %></h3>
 <% } %>
 
 <% if (user.isNew) { %>
@@ -9,8 +9,8 @@
 <% } else { %>
   <form action="/user/<%= user.id %>" method="post" class="info-form">
 <% } %>
-  <div class="row m-t-50">
-    <div class="col-xs-12 col-sm-4 col-sm-offset-4">
+  <div>
+    <div class="col-sm-4">
       <div class="form-group">
         <div class="input-group">
           <span class="input-group-addon">
@@ -26,11 +26,10 @@
         <input type="submit" class="btn btn-green" value="Create">
       <% } else { %>
         <input type="submit" class="btn btn-primary" value="Actualizar">
-        <form action="/user/<%= user._id %>/delete" method="post">
-          <input type="submit" value="Delete" class="btn btn-warning">
-        </form>
       <% } %>
-
     </div>
   </div>
+</form>
+<form action="/user/<%= user._id %>/delete" method="post">
+  <input type="submit" value="Borrar" class="btn btn-warning">
 </form>

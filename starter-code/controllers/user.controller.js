@@ -27,6 +27,7 @@ module.exports.update = (req, res, next) => {
 };
 
 module.exports.delete = (req, res, next) => {
+  console.log("llegué aqui")
   const userId = req.params.id;
 
   User.findByIdAndRemove(userId).then((user) => {
