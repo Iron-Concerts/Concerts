@@ -30,6 +30,6 @@ module.exports.delete = (req, res, next) => {
   const userId = req.params.id;
 
   User.findByIdAndRemove(userId).then((user) => {
-    return res.redirect('/users');
+    return res.redirect('/events');
   });
 };

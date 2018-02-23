@@ -1,6 +1,7 @@
 body {
   /*padding: 50px;*/
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+
 }
 
 a {
@@ -10,6 +11,15 @@ a {
 #imgEvent, img {
   height: 100px;
   width: 100px;
+}
+
+.main-background {
+  background-color: #D3D3D3;
+}
+
+.right {
+    position: absolute;
+    right: 30px;
 }
 
 #custom-search-form {
