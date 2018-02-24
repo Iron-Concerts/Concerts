@@ -12,7 +12,7 @@ const expressLayouts = require('express-ejs-layouts');
 const  flash = require('express-flash');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
-
+require('dotenv').config();
 require('./configs/db.config');
 require('./configs/passport.config').setup(passport);
 

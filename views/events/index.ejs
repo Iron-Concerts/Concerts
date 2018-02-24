@@ -1,9 +1,9 @@
 <div>
   <div class = "row">
     <div class = "col-md-1">
-      <button type="button" class="btn btn-primary navbar-btn" name="notifications">
+      <a href="/events"><button type="button" id="bellbutton" class="btn btn-primary navbar-btn" name="notifications">
       <span class="glyphicon glyphicon-bell"></span>
-      </button>
+    </button></a>
     </div>
     <div class = "col-md-1">
       <% if(session.role == 'ADMIN' ){ %>
@@ -85,31 +85,34 @@
 </div>
 
 <script type="text/javascript">
-
-
   $(document).ready(function(){
-    let userEvents;
-    let fetched = false;
-    const call = function(){
+  const call = function(userEvents) {
+    $.ajax({
+      url:'/events/userevents',
+      type: 'get',
+      success: function(newUserEvents) {
+        console.log(newUserEvents);
+        console.log(userEvents);
+        if (newUserEvents.eventsArray.length !== userEvents.eventsArray.length) {
+          $('#bellbutton').css('background-color', '#C3272B');
+          $('#bellbutton').css('border', '#C3272B');
+        }
+      }
+    })
+  }
+
+    const firstCall = function(){
       $.ajax({
-        url:'/events/all',
+        url:'/events/userevents',
         type: 'get',
-        success: function(userAndEvents){
-          const firstMusicStyle = userAndEvents.user.musicStyle[0];
-          const eventsArray = userAndEvents.events.filter(event => {
-            return event.typeStyle.includes(firstMusicStyle);
-          })
-          if(!fetched) {
-            return [eventsArray, true];
-          }
-          console.log(eventsArray, fetched);
+        success: function(userEvents) {
+          console.log(userEvents);
+          setInterval(function(){
+            call(userEvents)
+          },5000)
         }
       })
     }
-    var arr = call();
-    console.log(arr)
-    setInterval(call,2000);
-
-
+    firstCall();
   });
   </script>
