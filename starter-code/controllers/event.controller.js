@@ -4,13 +4,11 @@ const EVENT_TYPES = require('../models/events-type');
 const UserModel = require('../models/user.model');
 
 module.exports.index = (req, res, next) => {
-  const user = req.user || {};
   EventModel.find()
     .sort({createdAt: -1})
     .then((events) => {
       res.render('events/index', {
         events:events,
-        user,
       });
     }).catch(error => next(error));
 };
@@ -74,7 +72,7 @@ module.exports.pic = (req, res) => {
 };
 
 module.exports.showEdit = (req, res, next) => {
-console.log(req.params.id);
+console.log(req.body.id);
   // EventModel.findById(req.params.id)
   //  .then(() => {
   //    res.render('events/edit');
@@ -84,7 +82,20 @@ console.log(req.params.id);
    EventModel.findById(req.params.id).then((ev) => {
      res.render('events/edit', {
        ev: ev,
-       eventsType: EVENT_TYPES
+       eventsType: EVENT_TYPES,
+       user: req.user,
+     });
+   });
+};
+
+module.exports.search = (req, res, next) => {
+  const newSearch = req.body.searchQuery;
+  // { $regex: /.*newSearch.*/, $options: 'i'}
+  const regex = new RegExp(`.*${newSearch}.*`);
+  console.log(regex);
+   EventModel.find({artist: {$regex: regex, $options: 'i'}}).then((events) => {
+     res.render('events/index', {
+       events:events,
      });
    });
 };

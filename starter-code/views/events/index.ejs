@@ -6,14 +6,14 @@
       </button>
     </div>
     <div class = "col-md-1">
-      <% if( user.role == 'ADMIN' ){ %>
+      <% if(session.role == 'ADMIN' ){ %>
       <a href="/event" class="btn btn-primary navbar-btn"> Crear Evento </a>
       <% } %>
     </div>
     <div>
-      <form class="form-search form-horizontal">
+      <form action="/search" method="post" class="form-search form-horizontal">
           <div class ="right">
-              <input type="text" class="search-query" placeholder="Busca tu concierto">
+              <input type="text" name="searchQuery" class="search-query" placeholder="Escribe el artista">
               <button type="submit" class="btn btn-primary navbar-btn">
                 <span class="glyphicon glyphicon-search"></span> Buscar
               </button>
@@ -34,7 +34,7 @@
               <p class="col-md-2"> <%= event.description %> </p>
             </div>
             <div class="links">
-              <% if( user.role == 'ADMIN' ){ %>
+              <% if(session.role == 'ADMIN' ){ %>
                 <p class="col-md-2"><a href="/<%= event._id %>/edit"> Editar </a></p>
                 <p class="col-md-2"><a href="/<%= event._id %>/delete"> Eliminar </a></p>
               <% } else { %>
