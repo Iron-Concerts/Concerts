@@ -57,7 +57,6 @@ app.use(function (req, res, next) {
   next();
 });
 
-
 app.use('/', auth);
 app.use('/', user);
 app.use('/', events);
