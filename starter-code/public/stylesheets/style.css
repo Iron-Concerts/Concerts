@@ -21,6 +21,17 @@ a {
     right: 30px;
 }
 
+.modal-body {
+  display: flex;
+  justify-content: space-between;
+}
+
+.g-map {
+  width: 300px;
+  height: 300px;
+  z-index: 200
+}
+
 #custom-search-form {
        margin:0;
        margin-top: 5px;

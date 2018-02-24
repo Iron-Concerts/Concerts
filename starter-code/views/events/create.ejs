@@ -3,7 +3,6 @@
   <% if (typeof(error) !== 'undefined') { %>
   <h2>  <%= error %></h2>
   <% } %>
-  <!--<% if (typeof(session) !== 'undefined') { %> -->
    <form action="/event" method="post" enctype="multipart/form-data">
       <div class="form-group" required>
           <label class="checkbox-inline">
@@ -22,7 +21,7 @@
         </div>
 
       </div>
-<!-- añadir value newEvent.nameTour a todos los campos-->
+
       <div class="form-group">
         <label for="artist" class="col-sm-2 col-form-label"> Nombre del artista: </label>
         <div class="input-group col-sm-4">
@@ -87,5 +86,4 @@
         <button type="submit" class="btn btn-primary btn-sm"> Crear </button>
       </div>
     </form>
-    <!--<% } %> -->
 </div>

@@ -4,13 +4,11 @@ const EVENT_TYPES = require('../models/events-type');
 const UserModel = require('../models/user.model');
 
 module.exports.index = (req, res, next) => {
-  const user = req.user || {};
   EventModel.find()
     .sort({createdAt: -1})
     .then((events) => {
       res.render('events/index', {
         events:events,
-        user,
       });
     }).catch(error => next(error));
 };

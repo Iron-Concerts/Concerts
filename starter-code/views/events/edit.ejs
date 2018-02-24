@@ -1,90 +1,88 @@
-  <div>
-    <h2> Edit evento </h2>
-    <!--<% if (typeof(session) !== 'undefined') { %> -->
-     <form action="/<%= ev._id %>/edit" method="post" enctype="multipart/form-data">
-        <div class="input-group">
-
+<div>
+  <h2> Edit evento </h2>
+  <% if (typeof(error) !== 'undefined') { %>
+  <h2>  <%= error %></h2>
+  <% } %>
+   <form action="/<%= ev._id %>/edit" method="post" enctype="multipart/form-data">
+      <div class="form-group">
+          <label class="checkbox-inline">
             <input type="radio" name="events" value="<%= ev.events %>" <%= ev.events=='concierto' ? "checked" : ""%>> Concierto
+          </label>
+          <label class="checkbox-inline">
             <input type="radio" name="events" value="<%= ev.events %>" <%= ev.events=='festival' ? "checked" : ""%>> Festival
+          </label>
+      </div>
 
+      <div class="form-group">
+        <label for="nameTour" class="col-sm-2 col-form-label"> Nombre de la gira: </label>
+        <div class="input-group col-sm-4">
+          <input type="text" class="form-control" name="nameTour" value="<%= ev.nameTour %>">
         </div>
+      </div>
 
-        <div class="input-group">
-          <span>
-            <!--icono-->
-          </span>
-          <input type="text" name="nameTour" value="<%= ev.nameTour %>">
+      <div class="form-group">
+        <label for="artist" class="col-sm-2 col-form-label"> Nombre del artista: </label>
+        <div class="input-group col-sm-4">
+          <input type="text" class="form-control" name="artist" value="<%= ev.artist %>">
         </div>
+      </div>
 
-        <div class="input-group">
-          <span>
-            <!--icono-->
-          </span>
-          <input type="text" name="artist" value="<%= ev.artist %>">
+      <div class="form-group">
+        <<label for="description" class="col-sm-2 col-form-label"> Descripción: </label>
+        <div class="input-group col-sm-4">
+          <textarea name="description" class="form-control" rows="5"> <%= ev.description %> </textarea>
         </div>
+      </div>
 
-        <div class="input-group">
-          <span>
-            <!--icono-->
-          </span>
-          <textarea name="description" rows="10" cols="50"> <%= ev.description %> </textarea>
-        </div>
-
-        <div class="input-group">
-          <span>
-            <!--icono-->
-          </span>
-          <% console.log(ev.eventType) %>
-
-          <select class="typesStyle" name="typeStyle" multiple >
+      <div class="form-group">
+        <label for="typeStyle" class="col-sm-2 col-form-label"> Estilos de música: </label>
+        <div class="input-group col-sm-4">
+          <select class="form-control typesStyle" name="typeStyle" multiple >
             <% eventsType.forEach((type) => {%>
               <option value="<%= type %>" <%=ev.typeStyle.includes(type) ? "selected" : ""  %>> <%= type %>
             <% }) %>
           </select>
-
         </div>
+      </div>
 
-        <div class="input-group">
-          <span>
-            <!--icono-->
-          </span>
-          <input type="datetime-local" name="eventDate" value="<%= ev.eventDate %>">
+      <div class="form-group">
+        <label for="eventDate" class="col-sm-2 col-form-label"> Fecha y hora: </label>
+        <div class="input-group col-sm-4">
+          <input type="datetime-local" class="form-control" name="eventDate" value="<%= ev.eventDate %>">
         </div>
+      </div>
 
-        <div class="input-group">
-          <span>
-            <!--icono-->
-          </span>
-          <input type="text" name="venue" value="<%= ev.venue %>">
+      <div class="form-group">
+        <label for="venue" class="col-sm-2 col-form-label"> Lugar: </label>
+        <div class="input-group col-sm-4">
+          <input type="text" name="venue" class="form-control" value="<%= ev.venue %>">
         </div>
+      </div>
 
-        <div class="input-group">
-          <span>
-            <!--icono-->
-          </span>
-          <input type="text" name="location" value="<%= ev.location %>">
+      <div class="form-group">
+        <label for="location" class="col-sm-2 col-form-label"> Localización: </label>
+        <div class="input-group col-sm-4">
+          <input type="text" name="location" class="form-control" value="<%= ev.location %>">
         </div>
+      </div>
 
-        <div class="input-group">
-          <span>
-            <!--icono-->
-          </span>
-          <input type="number" name="price" value="<%= ev.price %>" step="0.01">
+      <div class="form-group">
+        <label for="price" class="col-sm-2 col-form-label"> Precio: </label>
+        <div class="input-group col-sm-4">
+          <input type="number" name="price" class="form-control" value="<%= ev.price %>" step="0.01">
         </div>
+      </div>
 
 
-        <div class="input-group">
-          <span>
-            <!--icono-->
-          </span>
-          <input type="file" name="pic" class="form-control-file" id="imgEvent">
-        </div>
+      <div class="form-group">
+        <label for="pic" class="col-sm-2 col-form-label"> Foto: </label>
+        <input type="file" name="pic" class="form-control-file" id="imgEvent">
+      </div>
 
 
 
-        <div>
-          <button> Editar </button>
-        </div>
-      </form>
-      <!--<% } %> -->
-  </div>
+      <div>
+        <button type="submit" class="btn btn-primary btn-sm"> Editar </button>
+      </div>
+    </form>
+</div>

@@ -6,7 +6,9 @@
       </button>
     </div>
     <div class = "col-md-1">
+      <% if(session.role == 'ADMIN' ){ %>
       <a href="/event" class="btn btn-primary navbar-btn"> Crear Evento </a>
+      <% } %>
     </div>
     <div>
       <form action="/search" method="post" class="form-search form-horizontal">
@@ -32,16 +34,59 @@
               <p class="col-md-2"> <%= event.description %> </p>
             </div>
             <div class="links">
-              <p class="col-md-2"><a href="/<%= event._id %>/edit"> Editar </a></p>
-              <p class="col-md-2"><a href="/<%= event._id %>/delete"> Eliminar </a></p>
+              <% if(session.role == 'ADMIN' ){ %>
+                <p class="col-md-2"><a href="/<%= event._id %>/edit"> Editar </a></p>
+                <p class="col-md-2"><a href="/<%= event._id %>/delete"> Eliminar </a></p>
+              <% } else { %>
+                <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal<%=event._id%>">Mas info</button>
+              <% } %>
             </div>
           </div>
         </div>
-      <% }); %>
-    <% } %>
+        <script type="text/javascript">
+          $('#myModal<%=event._id%>').on('shown.bs.modal', function () {
+              google.maps.event.trigger($('#myModal<%=event._id%> .g-map'), "resize");
+          });
+        </script>
+
+    <!-- modal -->
+    <div class="modal fade" id="myModal<%=event._id%>" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="row modal-content">
+            <div class="modal-header col-sm-12 center">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title"><%= event.nameTour%> -  <%= event.artist %></h4>
+            </div>
+            <div class="modal-body col-sm-12 ">
+              <div>
+                <p> <strong> Descripción: </strong>  <%= event.description %> </p>
+                <p> <strong> Estilo de música: </strong> <%= event.eventsType %> </p>
+                <p> <strong> Fecha y hora: </strong> <%= event.eventDate %> </p>
+                <p> <strong> Lugar: </strong> <%= event.venue %> </p>
+                <p> <strong> Localización: </strong> <%= event.location %> </p>
+                <p> <strong> Precio: </strong> <%= event.price %> € </p>
+              </div>
+              <div>
+                <img id="image-gallery-image" class="img-responsive" src="img/<%= event.imgEvent %>">
+              </div>
+              <div class="g-map" data-location="<%= event.venue %>"></div>
+            </div>
+            <div class="modal-footer col-sm-12">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+<% }); %>
+<% } %>
 </div>
 
 <script type="text/javascript">
+
+
   $(document).ready(function(){
     let userEvents;
     let fetched = false;
@@ -64,5 +109,7 @@
     var arr = call();
     console.log(arr)
     setInterval(call,2000);
+
+
   });
   </script>
