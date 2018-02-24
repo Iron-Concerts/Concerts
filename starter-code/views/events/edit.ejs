@@ -1,90 +1,90 @@
-<div>
-  <h2> Edit evento </h2>
-  <!--<% if (typeof(session) !== 'undefined') { %> -->
-   <form action="/<%= ev._id %>/edit" method="post" enctype="multipart/form-data">
-      <div class="input-group">
+  <div>
+    <h2> Edit evento </h2>
+    <!--<% if (typeof(session) !== 'undefined') { %> -->
+     <form action="/<%= ev._id %>/edit" method="post" enctype="multipart/form-data">
+        <div class="input-group">
 
-          <input type="radio" name="events" value="<%= ev.events %>" <%= ev.events=='concierto' ? "checked" : ""%>> Concierto
-          <input type="radio" name="events" value="<%= ev.events %>" <%= ev.events=='festival' ? "checked" : ""%>> Festival
+            <input type="radio" name="events" value="<%= ev.events %>" <%= ev.events=='concierto' ? "checked" : ""%>> Concierto
+            <input type="radio" name="events" value="<%= ev.events %>" <%= ev.events=='festival' ? "checked" : ""%>> Festival
 
-      </div>
+        </div>
 
-      <div class="input-group">
-        <span>
-          <!--icono-->
-        </span>
-        <input type="text" name="nameTour" value="<%= ev.nameTour %>">
-      </div>
+        <div class="input-group">
+          <span>
+            <!--icono-->
+          </span>
+          <input type="text" name="nameTour" value="<%= ev.nameTour %>">
+        </div>
 
-      <div class="input-group">
-        <span>
-          <!--icono-->
-        </span>
-        <input type="text" name="artist" value="<%= ev.artist %>">
-      </div>
+        <div class="input-group">
+          <span>
+            <!--icono-->
+          </span>
+          <input type="text" name="artist" value="<%= ev.artist %>">
+        </div>
 
-      <div class="input-group">
-        <span>
-          <!--icono-->
-        </span>
-        <textarea name="description" rows="10" cols="50"> <%= ev.description %> </textarea>
-      </div>
+        <div class="input-group">
+          <span>
+            <!--icono-->
+          </span>
+          <textarea name="description" rows="10" cols="50"> <%= ev.description %> </textarea>
+        </div>
 
-      <div class="input-group">
-        <span>
-          <!--icono-->
-        </span>
-        <% console.log(ev.eventType) %>
+        <div class="input-group">
+          <span>
+            <!--icono-->
+          </span>
+          <% console.log(ev.eventType) %>
 
-        <select class="typesStyle" name="typeStyle" multiple >
-          <% eventsType.forEach((type) => {%>
-            <option value="<%= type %>" <%=ev.typeStyle.includes(type) ? "selected" : ""  %>> <%= type %>
-          <% }) %>
-        </select>
+          <select class="typesStyle" name="typeStyle" multiple >
+            <% eventsType.forEach((type) => {%>
+              <option value="<%= type %>" <%=ev.typeStyle.includes(type) ? "selected" : ""  %>> <%= type %>
+            <% }) %>
+          </select>
 
-      </div>
+        </div>
 
-      <div class="input-group">
-        <span>
-          <!--icono-->
-        </span>
-        <input type="datetime-local" name="eventDate" value="<%= ev.eventDate %>">
-      </div>
+        <div class="input-group">
+          <span>
+            <!--icono-->
+          </span>
+          <input type="datetime-local" name="eventDate" value="<%= ev.eventDate %>">
+        </div>
 
-      <div class="input-group">
-        <span>
-          <!--icono-->
-        </span>
-        <input type="text" name="venue" value="<%= ev.venue %>">
-      </div>
+        <div class="input-group">
+          <span>
+            <!--icono-->
+          </span>
+          <input type="text" name="venue" value="<%= ev.venue %>">
+        </div>
 
-      <div class="input-group">
-        <span>
-          <!--icono-->
-        </span>
-        <input type="text" name="location" value="<%= ev.location %>">
-      </div>
+        <div class="input-group">
+          <span>
+            <!--icono-->
+          </span>
+          <input type="text" name="location" value="<%= ev.location %>">
+        </div>
 
-      <div class="input-group">
-        <span>
-          <!--icono-->
-        </span>
-        <input type="number" name="price" value="<%= ev.price %>" step="0.01">
-      </div>
-
-
-      <div class="input-group">
-        <span>
-          <!--icono-->
-        </span>
-        <input type="file" name="pic" class="form-control-file" id="imgEvent">
-      </div>
+        <div class="input-group">
+          <span>
+            <!--icono-->
+          </span>
+          <input type="number" name="price" value="<%= ev.price %>" step="0.01">
+        </div>
 
 
+        <div class="input-group">
+          <span>
+            <!--icono-->
+          </span>
+          <input type="file" name="pic" class="form-control-file" id="imgEvent">
+        </div>
 
-      <div>
-        <button> Editar </button>
-      </div>
-    </form>
-    <!--<% } %> -->
-</div>
+
+
+        <div>
+          <button> Editar </button>
+        </div>
+      </form>
+      <!--<% } %> -->
+  </div>
