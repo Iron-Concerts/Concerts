@@ -9,6 +9,7 @@ module.exports.index = (req, res, next) => {
     .then((events) => {
       res.render('events/index', {
         events:events,
+        GOOGLE_KEY: process.env.GOOGLE_KEY
       });
     }).catch(error => next(error));
 };
@@ -24,6 +25,18 @@ module.exports.getAll = (req, res) => {
   const user = req.user;
   EventModel.find({})
     .then(events => res.json({user, events}));
+};
+
+module.exports.getUserEvents = (req, res) => {
+  const user = req.user;
+  EventModel.find({})
+   .then(events => {
+     const firstMusicStyle = user.musicStyle[0];
+     const eventsArray = events.filter(event => {
+        return event.typeStyle.includes(firstMusicStyle);
+     });
+     res.json({eventsArray});
+   })
 };
 
 module.exports.create = (req, res) => {

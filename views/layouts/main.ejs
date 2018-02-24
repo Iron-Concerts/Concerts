@@ -19,10 +19,9 @@
 
 <body class = "main-background">
   <nav class="main-background navbar navbar-inverse navbar-static-top">
-    <a class="navbar-brand" href="#"> <!-- logo --> </a>
     <a class="navbar-brand" href="/events">Home</a>
-    <% if(typeof user !== 'undefined') { %>
-      <a class="navbar-brand" href="/user/<%= user._id %>/edit">Profile</a>
+    <% if(typeof session !== 'undefined') { %>
+      <a class="navbar-brand" href="/user/<%= session._id %>/edit">Profile</a>
       <a class="navbar-brand" href="/logout">Logout</a>
     <% } else { %>
       <a class="navbar-brand" href="/login">Login</a>
